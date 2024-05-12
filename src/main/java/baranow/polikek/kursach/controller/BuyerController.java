@@ -47,6 +47,7 @@ public class BuyerController {
         return updatedBuyerOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteBuyerById(@PathVariable Long id){
         buyerService.deleteBuyerById(id);

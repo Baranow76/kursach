@@ -35,9 +35,17 @@ public class EmployeeServiceImpl implements EmployeeService{
         Optional<Employee> existingEmployee = employeeRepository.findById(id);
         if(existingEmployee.isPresent()){
             Employee employeeToUpdate = existingEmployee.get();
-            employeeToUpdate.setNameEmployee(updatedEmployee.getNameEmployee());
-            employeeToUpdate.setSurnameEmployee(updatedEmployee.getSurnameEmployee());
-            employeeToUpdate.setNumTelephoneEmployee(updatedEmployee.getNumTelephoneEmployee());
+
+            if(updatedEmployee.getNameEmployee() != null) {
+                employeeToUpdate.setNameEmployee(updatedEmployee.getNameEmployee());
+            }
+            if(updatedEmployee.getSurnameEmployee() != null) {
+                employeeToUpdate.setSurnameEmployee(updatedEmployee.getSurnameEmployee());
+            }
+            if (updatedEmployee.getNumTelephoneEmployee() != null){
+                employeeToUpdate.setNumTelephoneEmployee(updatedEmployee.getNumTelephoneEmployee());
+            }
+            
             employeeRepository.save(employeeToUpdate);
         }
         return existingEmployee;

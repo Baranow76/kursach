@@ -40,11 +40,11 @@ public class PokupkaController {
     }
 
 
-//    @PutMapping("/{id}")
-//    ResponseEntity<Tovar> updateTovarById(@PathVariable Long id, @RequestBody Tovar updatedTovar) {
-//        Optional<Tovar> updatedTovarOptional = tovarService.putTovarById(id, updatedTovar);
-//        return updatedTovarOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
+    @PutMapping("/{id}")
+    ResponseEntity<Pokupka> updatePokupkaById(@PathVariable Long id, @RequestBody Pokupka updatedPokupka) {
+        Optional<Pokupka> updatedPokupkaOptional = pokupkaService.putPokupkaById(id, updatedPokupka);
+        return updatedPokupkaOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteTovarById(@PathVariable Long id){

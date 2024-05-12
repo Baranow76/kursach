@@ -10,7 +10,6 @@ import baranow.polikek.kursach.repository.PokupkaRepository;
 import baranow.polikek.kursach.repository.TovarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +30,6 @@ public class PokupkaServiceImpl implements PokupkaService{
         Buyer buyer = pokupka.getBuyer();
         Employee employee = pokupka.getEmployee();
 
-        // Проверяем, существуют ли эти сущности в бд
         if (tovar != null && tovar.getIdTovar() != null) {
             tovar = tovarRepository.findById(tovar.getIdTovar()).orElse(null);
         }
@@ -63,14 +61,31 @@ public class PokupkaServiceImpl implements PokupkaService{
     public Optional<Pokupka> putPokupkaById(Long id, Pokupka updatedPokupka) {
         Optional<Pokupka> existingPokupka = pokupkaRepository.findById(id);
         if(existingPokupka.isPresent()){
-            Pokupka pokupkaToUpdete = existingPokupka.get();
-            pokupkaToUpdete.setTovar(updatedPokupka.getTovar());
-            pokupkaRepository.save(pokupkaToUpdete);
+
+            Pokupka pokupkaToUpdate = existingPokupka.get();
+            if(updatedPokupka.getTovar() != null && updatedPokupka.getTovar().getIdTovar() != null) {
+                Tovar tovar = tovarRepository.findById(updatedPokupka.getTovar().getIdTovar()).orElse(null);
+                pokupkaToUpdate.setTovar(tovar);
+            }
+
+            if(updatedPokupka.getCountTovarInPokupka() != null) {
+                pokupkaToUpdate.setCountTovarInPokupka(updatedPokupka.getCountTovarInPokupka());
+            }
+
+            if(updatedPokupka.getBuyer() != null && updatedPokupka.getBuyer().getIdBuyer() != null) {
+                Buyer buyer = buyerRepository.findById(updatedPokupka.getBuyer().getIdBuyer()).orElse(null);
+                pokupkaToUpdate.setBuyer(buyer);
+            }
+
+            if(updatedPokupka.getEmployee() != null && updatedPokupka.getEmployee().getIdEmployee() != null) {
+                Employee employee = employeeRepository.findById(updatedPokupka.getEmployee().getIdEmployee()).orElse(null);
+                pokupkaToUpdate.setEmployee(employee);
+            }
+
+            pokupkaRepository.save(pokupkaToUpdate);
         }
         return existingPokupka;
     }
-
-
 
     @Override
     public void deletePokupkaById(Long id) {

@@ -35,13 +35,20 @@ public class BuyerServiceImpl implements BuyerService {
         Optional<Buyer> existingBuyer = buyerRepository.findById(id);
         if (existingBuyer.isPresent()) {
             Buyer buyerToUpdate = existingBuyer.get();
-            buyerToUpdate.setName(updatedBuyer.getName());
-            buyerToUpdate.setSurname(updatedBuyer.getSurname());
-            buyerToUpdate.setTelNumber(updatedBuyer.getTelNumber());
+            if (updatedBuyer.getName() != null) {
+                buyerToUpdate.setName(updatedBuyer.getName());
+            }
+            if (updatedBuyer.getSurname() != null) {
+                buyerToUpdate.setSurname(updatedBuyer.getSurname());
+            }
+            if (updatedBuyer.getTelNumber() != null) {
+                buyerToUpdate.setTelNumber(updatedBuyer.getTelNumber());
+            }
             buyerRepository.save(buyerToUpdate);
         }
         return existingBuyer;
     }
+
 
     @Override
     public void deleteBuyerById(Long id) {
