@@ -11,12 +11,12 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@Entity(name="tovars")
-@Table(name="tovars")
-public class Tovars {
+@Entity(name="tovar")
+@Table(name="tovar")
+public class Tovar {
 
     @Id
-    @Column(name="id_tovars")
+    @Column(name="id_tovar")
     @GeneratedValue(generator = "id_tov_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "id_tov_seq", sequenceName = "id_tov_seq", initialValue = 1, allocationSize = 1)
     private Long idTovar;

@@ -1,6 +1,5 @@
 package baranow.polikek.kursach.service;
 
-import baranow.polikek.kursach.model.Buyer;
 import baranow.polikek.kursach.model.Employee;
 
 import java.util.List;

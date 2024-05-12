@@ -1,7 +1,6 @@
 package baranow.polikek.kursach.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +27,7 @@ public class Pokupka {
 
     @ManyToOne
     @JoinColumn(name = "id_tovara")
-    private Tovars tovar;
+    private Tovar tovar;
 
     @Column(name="count_tovar_in_pokupka")
     private Long countTovarInPokupka;
@@ -43,7 +42,7 @@ public class Pokupka {
 
     @CreationTimestamp
     @Column(name = "date_change_place")
-    private LocalDateTime dateAddJoke;
+    private LocalDateTime dateAddPokupka;
 
 
 
