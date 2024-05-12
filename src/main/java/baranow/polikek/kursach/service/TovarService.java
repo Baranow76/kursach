@@ -1,6 +1,6 @@
 package baranow.polikek.kursach.service;
 
-import baranow.polikek.kursach.model.Pokupka;
+
 import baranow.polikek.kursach.model.Tovar;
 
 import java.util.List;
