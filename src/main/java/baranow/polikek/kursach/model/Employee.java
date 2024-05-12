@@ -1,6 +1,7 @@
 package baranow.polikek.kursach.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class Employee {
     @Column(name = "number_telephone_employee")
     private String numTelephoneEmployee;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "employee")
     private List<Pokupka> pokupkas;
 

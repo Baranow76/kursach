@@ -1,9 +1,6 @@
 package baranow.polikek.kursach.controller;
 
-
-import baranow.polikek.kursach.model.Buyer;
 import baranow.polikek.kursach.model.Tovar;
-import baranow.polikek.kursach.service.BuyerService;
 import baranow.polikek.kursach.service.TovarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

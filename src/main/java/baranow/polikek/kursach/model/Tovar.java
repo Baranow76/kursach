@@ -1,6 +1,7 @@
 package baranow.polikek.kursach.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,6 +34,7 @@ public class Tovar {
     @Column(name="discount")
     private Long discount;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tovar")
     private List<Pokupka> pokupkas;
 
