@@ -4,6 +4,7 @@ package baranow.polikek.kursach.controller;
 import baranow.polikek.kursach.model.Buyer;
 import baranow.polikek.kursach.service.BuyerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +29,8 @@ public class BuyerController {
 
 
     @GetMapping
-    ResponseEntity<List<Buyer>> getAllBuyers(){
-        return ResponseEntity.ok(buyerService.getAllBuyers());
+    ResponseEntity<Page<Buyer>> getAllBuyers(@RequestParam int page){
+        return ResponseEntity.ok(buyerService.getAllBuyers(page));
 
     }
 

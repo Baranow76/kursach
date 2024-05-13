@@ -5,6 +5,8 @@ import baranow.polikek.kursach.model.Buyer;
 import baranow.polikek.kursach.repository.BuyerRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +30,9 @@ public class BuyerServiceImpl implements BuyerService {
     }
 
     @Override
-    public List<Buyer> getAllBuyers() {
-        return buyerRepository.findAll();
+    public Page<Buyer> getAllBuyers(int page) {
+        int size = 2;
+        return buyerRepository.findAll(PageRequest.of(page, size));
     }
 
     @Override

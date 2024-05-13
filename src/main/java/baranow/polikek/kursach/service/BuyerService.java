@@ -1,6 +1,7 @@
 package baranow.polikek.kursach.service;
 
 import baranow.polikek.kursach.model.Buyer;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +9,7 @@ import java.util.Optional;
 public interface BuyerService {
     void addBuyer(Buyer buyer);
 
-    List<Buyer> getAllBuyers();
+    Page<Buyer> getAllBuyers(int page);
 
     Optional<Buyer> getBuyerById(Long id);
 
