@@ -1,8 +1,10 @@
 package baranow.polikek.kursach.service;
 
+import baranow.polikek.kursach.exceptions.ExceptionHandler;
 import baranow.polikek.kursach.model.Buyer;
 import baranow.polikek.kursach.repository.BuyerRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +16,15 @@ import java.util.Optional;
 public class BuyerServiceImpl implements BuyerService {
 
     private final BuyerRepository buyerRepository;
-
+    private final ExceptionHandler exceptionHandler;
     @Override
     public void addBuyer(Buyer buyer) {
-        buyerRepository.save(buyer);
+        try {
+            buyerRepository.save(buyer);
+        }catch (Exception e){
+            exceptionHandler.handleException(e);
+        }
+
     }
 
     @Override
@@ -44,7 +51,11 @@ public class BuyerServiceImpl implements BuyerService {
             if (updatedBuyer.getTelNumber() != null) {
                 buyerToUpdate.setTelNumber(updatedBuyer.getTelNumber());
             }
-            buyerRepository.save(buyerToUpdate);
+            try {
+                buyerRepository.save(buyerToUpdate);
+            }catch (Exception e){
+                exceptionHandler.handleException(e);
+            }
         }
         return existingBuyer;
     }

@@ -1,5 +1,6 @@
 package baranow.polikek.kursach.service;
 
+import baranow.polikek.kursach.exceptions.ExceptionHandler;
 import baranow.polikek.kursach.model.Buyer;
 import baranow.polikek.kursach.model.Employee;
 import baranow.polikek.kursach.model.Pokupka;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 public class PokupkaServiceImpl implements PokupkaService{
 
+    private final ExceptionHandler exceptionHandler;
     private final PokupkaRepository pokupkaRepository;
     private final TovarRepository tovarRepository;
     private final BuyerRepository buyerRepository;
@@ -44,7 +46,11 @@ public class PokupkaServiceImpl implements PokupkaService{
         pokupka.setBuyer(buyer);
         pokupka.setEmployee(employee);
 
-        pokupkaRepository.save(pokupka);
+        try {
+            pokupkaRepository.save(pokupka);
+        } catch (Exception e) {
+            exceptionHandler.handleException(e);
+        }
     }
 
     @Override
@@ -81,8 +87,12 @@ public class PokupkaServiceImpl implements PokupkaService{
                 Employee employee = employeeRepository.findById(updatedPokupka.getEmployee().getIdEmployee()).orElse(null);
                 pokupkaToUpdate.setEmployee(employee);
             }
+            try {
+                pokupkaRepository.save(pokupkaToUpdate);
+            }catch (Exception e){
+                exceptionHandler.handleException(e);
+            }
 
-            pokupkaRepository.save(pokupkaToUpdate);
         }
         return existingPokupka;
     }

@@ -1,9 +1,11 @@
 package baranow.polikek.kursach.service;
+import baranow.polikek.kursach.exceptions.ExceptionHandler;
 import baranow.polikek.kursach.model.Employee;
 import baranow.polikek.kursach.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,9 +16,15 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     private final EmployeeRepository employeeRepository;
 
+    private final ExceptionHandler exceptionHandler;
+
     @Override
     public void addEmployee(Employee employee) {
-        employeeRepository.save(employee);
+        try {
+            employeeRepository.save(employee);
+        }catch (Exception e){
+            exceptionHandler.handleException(e);
+        }
 
     }
 
@@ -45,8 +53,12 @@ public class EmployeeServiceImpl implements EmployeeService{
             if (updatedEmployee.getNumTelephoneEmployee() != null){
                 employeeToUpdate.setNumTelephoneEmployee(updatedEmployee.getNumTelephoneEmployee());
             }
-            
-            employeeRepository.save(employeeToUpdate);
+
+            try {
+                employeeRepository.save(employeeToUpdate);
+            }catch (Exception e){
+                exceptionHandler.handleException(e);
+            }
         }
         return existingEmployee;
     }
