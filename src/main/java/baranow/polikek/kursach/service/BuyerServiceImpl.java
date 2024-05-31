@@ -31,7 +31,7 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public Page<Buyer> getAllBuyers(int page) {
-        int size = 2;
+        int size = 4;
         return buyerRepository.findAll(PageRequest.of(page, size));
     }
 

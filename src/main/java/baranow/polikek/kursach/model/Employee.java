@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Employee {
     @Column(name="id_employee")
     @GeneratedValue(generator = "id_employee_seq", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "id_employee_seq", sequenceName = "id_employee_seq", initialValue = 1, allocationSize = 1)
+    @NotNull
     private Long idEmployee;
 
     @Column(name = "name_employee")
@@ -35,6 +37,6 @@ public class Employee {
 
     @JsonIgnore
     @OneToMany(mappedBy = "employee")
-    private List<Pokupka> pokupkas;
+    private List<Purchase> purchases;
 
 }
