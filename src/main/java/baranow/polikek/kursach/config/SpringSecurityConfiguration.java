@@ -22,22 +22,27 @@ public class SpringSecurityConfiguration {
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //        http.authorizeHttpRequests(expressionInterceptUrlRegistry ->
-//                        expressionInterceptUrlRegistry
-//                                .requestMatchers("/registration", "/login").permitAll()
-//                                .requestMatchers(HttpMethod.POST, "/buyer").hasAuthority(UserAuthority.PLACE_ORDERS.getAuthority())
-//                                .requestMatchers(HttpMethod.GET, "/buyer").hasAuthority(UserAuthority.MANAGE_ORDERS.getAuthority())
-//                                .requestMatchers(HttpMethod.POST, "/product").hasAuthority(UserAuthority.PLACE_ORDERS.getAuthority())
-//                                .requestMatchers(HttpMethod.GET, "/product/**").hasAuthority(UserAuthority.MANAGE_ORDERS.getAuthority())
-//                                .requestMatchers(HttpMethod.POST, "/purchase").hasAuthority(UserAuthority.PLACE_ORDERS.getAuthority())
-//                                .requestMatchers(HttpMethod.GET, "/purchase/**").hasAuthority(UserAuthority.MANAGE_ORDERS.getAuthority())
-//                                .requestMatchers(HttpMethod.POST, "/employee").hasAuthority(UserAuthority.PLACE_ORDERS.getAuthority())
-//                                .requestMatchers(HttpMethod.GET, "/employee/**").hasAuthority(UserAuthority.MANAGE_ORDERS.getAuthority())
-//                                .anyRequest().hasAuthority(UserAuthority.FULL.getAuthority()))
+//                expressionInterceptUrlRegistry
+//                .requestMatchers("/registration", "/login").permitAll()
+//                .requestMatchers(HttpMethod.POST, "/product").hasAnyAuthority(UserAuthority.EMPLOYEE.getAuthority())
+//                .requestMatchers(HttpMethod.GET, "/product/**").hasAnyAuthority(UserAuthority.EMPLOYEE.getAuthority(), UserAuthority.BUYER.getAuthority())
+//                .requestMatchers(HttpMethod.PUT, "/product/**").hasAnyAuthority(UserAuthority.EMPLOYEE.getAuthority())
+//                .requestMatchers(HttpMethod.DELETE, "/product/**").hasAnyAuthority(UserAuthority.EMPLOYEE.getAuthority())
+//                .requestMatchers(HttpMethod.POST, "/purchase").hasAnyAuthority(UserAuthority.EMPLOYEE.getAuthority(), UserAuthority.BUYER.getAuthority())
+//                .requestMatchers(HttpMethod.GET, "/purchase/**").hasAnyAuthority(UserAuthority.EMPLOYEE.getAuthority(), UserAuthority.BUYER.getAuthority())
+//                .requestMatchers(HttpMethod.PUT, "/purchase/**").hasAnyAuthority(UserAuthority.EMPLOYEE.getAuthority())
+//                .requestMatchers(HttpMethod.DELETE, "/purchase/**").hasAnyAuthority(UserAuthority.EMPLOYEE.getAuthority())
+//                .requestMatchers(HttpMethod.POST, "/employee").hasAuthority(UserAuthority.EMPLOYEE.getAuthority())
+//                .requestMatchers(HttpMethod.GET, "/employee/**").hasAuthority(UserAuthority.EMPLOYEE.getAuthority())
+//                .requestMatchers(HttpMethod.PUT, "/employee/**").hasAuthority(UserAuthority.EMPLOYEE.getAuthority())
+//                .requestMatchers(HttpMethod.DELETE, "/employee/**").hasAuthority(UserAuthority.EMPLOYEE.getAuthority())
+//                        .anyRequest().hasAuthority(UserAuthority.FULL.getAuthority()))
 //                .formLogin(Customizer.withDefaults())
 //                .csrf(AbstractHttpConfigurer::disable);
 //
 //        return http.build();
 //    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(expressionInterceptUrlRegistry ->
@@ -48,6 +53,7 @@ public class SpringSecurityConfiguration {
 
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

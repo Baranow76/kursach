@@ -4,8 +4,10 @@ package baranow.polikek.kursach.controller;
 import baranow.polikek.kursach.model.Buyer;
 import baranow.polikek.kursach.model.Employee;
 import baranow.polikek.kursach.service.EmployeeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +21,8 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @PostMapping
-    ResponseEntity<Void> addEmployee(@RequestBody Employee employee){
+    ResponseEntity<Void> addEmployee(@RequestBody @Valid Employee employee,
+                                     BindingResult bindingResult){
         employeeService.addEmployee(employee);
         return ResponseEntity.ok().build();
     }

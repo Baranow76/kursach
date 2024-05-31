@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRolesRepository userRolesRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-//    private final EntityManager manager;
+
     @Override
     public void registration(String username, String password) {
         if (userRepository.findByUsername(username).isEmpty()) {
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                             .setExpired(false)
                             .setEnabled(true)
             );
-            userRolesRepository.save(new UserRole(null, UserAuthority.PLACE_ORDERS, user));
+            userRolesRepository.save(new UserRole(null, UserAuthority.BUYER, user));
         } else {
             throw new UsernameAlreadyExistsException();
         }

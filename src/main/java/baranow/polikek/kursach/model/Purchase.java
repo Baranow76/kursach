@@ -2,6 +2,7 @@ package baranow.polikek.kursach.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,17 +29,21 @@ public class Purchase {
     @JoinColumn(name = "id_product")
     private Product product;
 
+    @NotEmpty(message = "Sorry, empty")
     @Column(name="count_tovar_in_purchase")
-    private Long countTovarInPurchase;
+    private Long countProductInPurchase;
 
+    @NotEmpty(message = "Sorry, empty")
     @ManyToOne
     @JoinColumn(name = "id_buyer")
     private Buyer buyer;
 
+    @NotEmpty(message = "Sorry, empty")
     @ManyToOne
     @JoinColumn(name = "id_employee")
     private Employee employee;
 
+    @NotEmpty(message = "Sorry, empty")
     @CreationTimestamp
     @Column(name = "date_added_purchase")
     private LocalDateTime dateAddedPurchase;

@@ -20,11 +20,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void addProduct(Product product) {
-        try {
             productRepository.save(product);
-        } catch (Exception e) {
-            exceptionHandler.handleException(e);
-        }
     }
 
     @Override
@@ -56,11 +52,7 @@ public class ProductServiceImpl implements ProductService {
                 productToUpdate.setCountAvailable(updatedProduct.getCountAvailable());
             }
 
-            try {
-                productRepository.save(productToUpdate);
-            } catch (Exception e) {
-                exceptionHandler.handleException(e);
-            }
+            productRepository.save(productToUpdate);
         }
         return existingProduct;
     }

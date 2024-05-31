@@ -20,12 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public void addEmployee(Employee employee) {
-        try {
             employeeRepository.save(employee);
-        }catch (Exception e){
-            exceptionHandler.handleException(e);
-        }
-
     }
 
     @Override
@@ -53,12 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService{
             if (updatedEmployee.getNumTelephoneEmployee() != null){
                 employeeToUpdate.setNumTelephoneEmployee(updatedEmployee.getNumTelephoneEmployee());
             }
-
-            try {
                 employeeRepository.save(employeeToUpdate);
-            }catch (Exception e){
-                exceptionHandler.handleException(e);
-            }
         }
         return existingEmployee;
     }

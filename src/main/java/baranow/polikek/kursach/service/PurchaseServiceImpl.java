@@ -9,13 +9,8 @@ import baranow.polikek.kursach.repository.BuyerRepository;
 import baranow.polikek.kursach.repository.EmployeeRepository;
 import baranow.polikek.kursach.repository.PurchaseRepository;
 import baranow.polikek.kursach.repository.ProductRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,29 +27,29 @@ public class PurchaseServiceImpl implements PurchaseService {
     private final EmployeeRepository employeeRepository;
 
     @Override
-    @Transactional
-    public void addPurchase(@Valid Purchase purchase) {
-        // Получаем идентификаторы сущностей из покупки
-        Long productId = purchase.getProduct().getIdProduct();
-        Long buyerId = purchase.getBuyer().getIdBuyer();
-        Long employeeId = purchase.getEmployee().getIdEmployee();
+    public void addPurchase(Purchase purchase) {
+        Product product = purchase.getProduct();
+        Buyer buyer = purchase.getBuyer();
+        Employee employee = purchase.getEmployee();
 
-        // Проверяем существование сущностей в базе данных
-        Product tovar = productRepository.findById(productId)
-                .orElseThrow(() -> new EntityNotFoundException("Продукт с id " + productId + " не найден"));
-        Buyer buyer = buyerRepository.findById(buyerId)
-                .orElseThrow(() -> new EntityNotFoundException("Покупатель с id " + buyerId + " не найден"));
-        Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new EntityNotFoundException("Сотрудник с id " + employeeId + " не найден"));
+        if (product != null && product.getIdProduct() != null) {
+            product = productRepository.findById(product.getIdProduct()).orElse(null);
+        }
+        if (buyer != null && buyer.getIdBuyer() != null) {
+            buyer = buyerRepository.findById(buyer.getIdBuyer()).orElse(null);
+        }
+        if (employee != null && employee.getIdEmployee() != null) {
+            employee = employeeRepository.findById(employee.getIdEmployee()).orElse(null);
+        }
 
-
-        purchase.setProduct(tovar);
+        purchase.setProduct(product);
         purchase.setBuyer(buyer);
         purchase.setEmployee(employee);
 
         purchaseRepository.save(purchase);
 
     }
+
 
     @Override
     public List<Purchase> getAllPurchase() {
@@ -67,16 +62,32 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public Optional<Purchase> putPurchaseById(Long id, @Valid Purchase updatedPurchase, BindingResult result) {
-        Optional<Purchase> existingPokupka = purchaseRepository.findById(id);
-        if(existingPokupka.isPresent()){
-            Purchase purchaseToUpdate = existingPokupka.get();
+    public Optional<Purchase> putPurchaseById(Long id, Purchase updatedPurchase) {
+        Optional<Purchase> existingPurchase = purchaseRepository.findById(id);
+        if(existingPurchase.isPresent()){
 
-            BeanUtils.copyProperties(updatedPurchase, purchaseToUpdate, "idPokupki");
+            Purchase purchaseToUpdate = existingPurchase.get();
+            if(updatedPurchase.getProduct() != null && updatedPurchase.getProduct().getIdProduct() != null) {
+                Product product = productRepository.findById(updatedPurchase.getProduct().getIdProduct()).orElse(null);
+                purchaseToUpdate.setProduct(product);
+            }
 
+            if(updatedPurchase.getCountProductInPurchase() != null) {
+                purchaseToUpdate.setCountProductInPurchase(updatedPurchase.getCountProductInPurchase());
+            }
+
+            if(updatedPurchase.getBuyer() != null && updatedPurchase.getBuyer().getIdBuyer() != null) {
+                Buyer buyer = buyerRepository.findById(updatedPurchase.getBuyer().getIdBuyer()).orElse(null);
+                purchaseToUpdate.setBuyer(buyer);
+            }
+
+            if(updatedPurchase.getEmployee() != null && updatedPurchase.getEmployee().getIdEmployee() != null) {
+                Employee employee = employeeRepository.findById(updatedPurchase.getEmployee().getIdEmployee()).orElse(null);
+                purchaseToUpdate.setEmployee(employee);
+            }
             purchaseRepository.save(purchaseToUpdate);
         }
-        return existingPokupka;
+        return existingPurchase;
     }
 
 

@@ -3,9 +3,11 @@ package baranow.polikek.kursach.controller;
 
 import baranow.polikek.kursach.model.Buyer;
 import baranow.polikek.kursach.service.BuyerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +23,8 @@ public class BuyerController {
 
 
     @PostMapping
-    ResponseEntity<Void> addBuyer(@RequestBody Buyer buyer){
+    ResponseEntity<Void> addBuyer(@RequestBody @Valid Buyer buyer,
+                                  BindingResult bindingResult){
         buyerService.addBuyer(buyer);
         return ResponseEntity.ok().build();
 

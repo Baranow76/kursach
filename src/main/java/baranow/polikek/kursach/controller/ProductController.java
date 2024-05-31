@@ -4,8 +4,10 @@ import baranow.polikek.kursach.model.Product;
 import baranow.polikek.kursach.model.ProductWithCount;
 import baranow.polikek.kursach.repository.ProductRepository;
 import baranow.polikek.kursach.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +22,8 @@ public class ProductController {
     private final ProductRepository productRepository;
 
     @PostMapping
-    ResponseEntity<Void> addTovar(@RequestBody Product tovar){
+    ResponseEntity<Void> addTovar(@RequestBody @Valid Product tovar,
+                                  BindingResult bindingResult){
         productService.addProduct(tovar);
         return ResponseEntity.ok().build();
 
@@ -53,6 +56,7 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
+    //популярные товары топ 5
     @GetMapping("/top5")
     ResponseEntity<List<ProductWithCount>> getTop5Products() {
         return ResponseEntity.ok(productRepository.findTop5Products());

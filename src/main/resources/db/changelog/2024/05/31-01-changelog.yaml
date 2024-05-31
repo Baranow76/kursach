@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1717159137331-1
+      id: 1717170075077-1
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -9,7 +9,7 @@ databaseChangeLog:
             sequenceName: id_buyer_seq
             startValue: 1
   - changeSet:
-      id: 1717159137331-2
+      id: 1717170075077-2
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -18,7 +18,7 @@ databaseChangeLog:
             sequenceName: id_employee_seq
             startValue: 1
   - changeSet:
-      id: 1717159137331-3
+      id: 1717170075077-3
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -27,7 +27,7 @@ databaseChangeLog:
             sequenceName: id_prod_seq
             startValue: 1
   - changeSet:
-      id: 1717159137331-4
+      id: 1717170075077-4
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -36,7 +36,7 @@ databaseChangeLog:
             sequenceName: id_purchase_seq
             startValue: 1
   - changeSet:
-      id: 1717159137331-5
+      id: 1717170075077-5
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -45,7 +45,7 @@ databaseChangeLog:
             sequenceName: user_id_seq
             startValue: 1
   - changeSet:
-      id: 1717159137331-6
+      id: 1717170075077-6
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -54,7 +54,7 @@ databaseChangeLog:
             sequenceName: user_role_id_seq
             startValue: 1
   - changeSet:
-      id: 1717159137331-7
+      id: 1717170075077-7
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -78,7 +78,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: buyer
   - changeSet:
-      id: 1717159137331-8
+      id: 1717170075077-8
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -102,7 +102,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
             tableName: employee
   - changeSet:
-      id: 1717159137331-9
+      id: 1717170075077-9
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -129,7 +129,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: product
   - changeSet:
-      id: 1717159137331-10
+      id: 1717170075077-10
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -159,7 +159,7 @@ databaseChangeLog:
                   type: DATETIME
             tableName: purchase
   - changeSet:
-      id: 1717159137331-11
+      id: 1717170075077-11
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -180,7 +180,7 @@ databaseChangeLog:
                   type: BIGINT
             tableName: user_roles
   - changeSet:
-      id: 1717159137331-12
+      id: 1717170075077-12
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -216,7 +216,7 @@ databaseChangeLog:
                   type: BOOLEAN
             tableName: users
   - changeSet:
-      id: 1717159137331-13
+      id: 1717170075077-13
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -227,7 +227,7 @@ databaseChangeLog:
             referencedColumnNames: id_buyer
             referencedTableName: buyer
   - changeSet:
-      id: 1717159137331-14
+      id: 1717170075077-14
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -238,7 +238,7 @@ databaseChangeLog:
             referencedColumnNames: id_employee
             referencedTableName: employee
   - changeSet:
-      id: 1717159137331-15
+      id: 1717170075077-15
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -249,7 +249,7 @@ databaseChangeLog:
             referencedColumnNames: id_product
             referencedTableName: product
   - changeSet:
-      id: 1717159137331-16
+      id: 1717170075077-16
       author: mihailbaranov (generated)
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
